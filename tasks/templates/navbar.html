@@ -1,0 +1,148 @@
+<nav class="bg-neutral-200 dark:bg-neutral-900 p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <!-- Logo o Nombre -->
+    <a href="/" class="text-2xl font-bold hover:text-neutral-400 transition">
+      MyTasks
+    </a>
+
+    <!-- Botón de menú (visible en pantallas medianas o más pequeñas) -->
+    <button
+      id="menu-toggle"
+      class="text-neutral-700 dark:text-white block lg:hidden focus:outline-none"
+      aria-label="Toggle navigation"
+    >
+      <svg
+        class="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Menú principal (visible en pantallas grandes) -->
+    <ul class="hidden lg:flex items-center space-x-4">
+      {% if request.user.is_authenticated %}
+      <li>
+        <a href="/tasks/create" class="hover:text-neutral-400 transition">
+          Create Task
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'tasks' %}" class="hover:text-neutral-400 transition">
+          Tasks Pending
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'tasks_completed' %}"
+          class="hover:text-neutral-400 transition"
+        >
+          Tasks Completed
+        </a>
+      </li>
+      <li>
+        <a
+          href="/logout"
+          class="bg-red-600 px-4 py-2 rounded text-white hover:bg-red-500 transition"
+        >
+          Logout
+        </a>
+      </li>
+      {% else %}
+      <li>
+        <a
+          href="/signup"
+          class="bg-blue-600 px-4 py-2 rounded text-white hover:bg-blue-500 transition"
+        >
+          SignUp
+        </a>
+      </li>
+      <li>
+        <a
+          href="/signin"
+          class="bg-green-600 px-4 py-2 rounded text-white hover:bg-green-500 transition"
+        >
+          SignIn
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+
+<!-- Contenedor del menú desplegable (visible en pantallas medianas o más pequeñas) -->
+<div
+  id="menu-card"
+  class="hidden fixed top-16 right-4 w-64 bg-neutral-50 dark:bg-neutral-700 shadow-lg rounded-lg lg:hidden"
+>
+  <ul class="p-4 space-y-2 text-center">
+    {% if request.user.is_authenticated %}
+    <li>
+      <a href="/tasks/create" class="block hover:text-neutral-400 transition">
+        Create Task
+      </a>
+    </li>
+    <li>
+      <a
+        href="{% url 'tasks' %}"
+        class="block hover:text-neutral-400 transition"
+      >
+        Tasks Pending
+      </a>
+    </li>
+    <li>
+      <a
+        href="{% url 'tasks_completed' %}"
+        class="block hover:text-neutral-400 transition"
+      >
+        Tasks Completed
+      </a>
+    </li>
+    <li>
+      <a
+        href="/logout"
+        class="block bg-red-600 px-4 py-2 rounded text-white hover:bg-red-500 transition"
+      >
+        Logout
+      </a>
+    </li>
+    {% else %}
+    <li>
+      <a
+        href="/signup"
+        class="block bg-blue-600 px-4 py-2 rounded text-white hover:bg-blue-500 transition"
+      >
+        SignUp
+      </a>
+    </li>
+    <li>
+      <a
+        href="/signin"
+        class="block bg-green-600 px-4 py-2 rounded text-white hover:bg-green-500 transition"
+      >
+        SignIn
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</div>
+
+<script>
+  // Alternar visibilidad del menú tipo card
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuCard = document.getElementById("menu-card");
+
+    menuToggle.addEventListener("click", () => {
+      menuCard.classList.toggle("hidden");
+    });
+  });
+</script>

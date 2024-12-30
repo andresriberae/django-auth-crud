@@ -1,13 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 <div
-  class="flex flex-row items-center justify-center min-h-[calc(100vh-8rem)] gap-4"
+  class="flex flex-col md:flex-row items-center justify-center min-h-[calc(100vh-8rem)] gap-4"
 >
   <div class="flex flex-col">
     <!-- Card -->
     <div
       class="shadow-lg rounded-2xl p-8 w-full {% if task.important %}bg-red-500 text-white{% else %}bg-white{% endif %} mb-4"
     >
-      <a href="{% url 'task_detail' task.id %}">
+      <div>
         <h2
           class="text-2xl font-semibold mb-4 text-center {% if task.important %}text-white {% else %}text-gray-800{% endif %}"
         >
@@ -25,8 +25,9 @@
         >
           {{ task.datecompleted|date:"M j, Y:i" }}
         </p>
-      </a>
+      </div>
     </div>
+    <!-- Buttons Actions-->
     <div class="flex items-center space-x-2 justify-center">
       <form action="{% url 'complete_task' task.id %}" method="POST">
         {% csrf_token %}
@@ -49,15 +50,15 @@
   </div>
   <div class="flex flex-col">
     <!-- Card -->
-    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
+    <div class="bg-white dark:bg-neutral-700 text-gray-700 dark:text-white shadow-lg rounded-lg p-8 w-full max-w-md">
+      <h2 class="text-2xl font-semibold mb-4 text-center">
         Updating Task
       </h2>
       <!-- Form -->
       <form method="POST" class="space-y-4">
         {% csrf_token %}
         <div>
-          <label for="id_title" class="block text-gray-700 font-medium mb-2"
+          <label for="id_title" class="blockfont-medium mb-2"
             >Title</label
           >
           {{ form.title }}
@@ -65,14 +66,14 @@
         <div>
           <label
             for="id_description"
-            class="block text-gray-700 font-medium mb-2"
+            class="block font-medium mb-2"
             >Description</label
           >
           {{ form.description }}
         </div>
         <div class="flex items-center space-x-2">
           {{ form.important }}
-          <label for="id_important" class="text-gray-700"
+          <label for="id_important"
             >Mark as important</label
           >
         </div>
