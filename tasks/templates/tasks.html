@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block content %}
+<h1 class="text-3xl font-bold mb-4 justify-center p-5">
+  {% if tasks_completed %}Tasks Completed{% else %}Tasks Pending... {% endif %}
+</h1>
+
+{% if tasks.count == 0 %}
+<div
+  class="flex flex-col gap-4 items-center justify-center min-h-[calc(100vh-12rem)]"
+>
+  <h3>No tasks found</h3>
+  <button
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+  >
+    <a href="{% url 'create_task' %}">Create Task</a>
+  </button>
+</div>
+{% endif %}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  {% for task in tasks %}
+  <!-- Card -->
+  <div
+    class="shadow-lg rounded-2xl p-8 w-full {% if task.important %}bg-red-500 text-white{% else %}bg-white{% endif %} mb-4"
+  >
+    <a href="{% url 'task_detail' task.id %}">
+      <h2
+        class="text-2xl font-semibold mb-4 text-center {% if task.important %}text-white {% else %}text-gray-800{% endif %}"
+      >
+        {{ task.title }}
+      </h2>
+
+      <p
+        class="{% if task.important %}text-white{% else %}text-gray-600{% endif %}"
+      >
+        {{ task.description }}
+      </p>
+
+      <p
+        class="{% if task.important %}text-white{% else %}text-gray-600{% endif %} font-semibold"
+      >
+        {{ task.datecompleted|date:"M j, Y:i" }}
+      </p>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
