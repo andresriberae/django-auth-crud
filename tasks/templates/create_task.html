@@ -1,5 +1,9 @@
-{% extends 'base.html' %} {% block content %} {{error}}
+{% extends 'base.html' %} {% block content %}
 <div class="flex items-center justify-center min-h-[calc(100vh-8rem)]">
+  <!-- Modal de Error -->
+  {% if error %}
+  {% include 'modal_error.html' with error=error %}
+  {% endif %}
   <!-- Card -->
   <div class="bg-white dark:bg-neutral-700 text-gray-700 dark:text-white shadow-lg rounded-lg p-8 w-full max-w-md">
     <h2 class="text-2xl font-semibold mb-4 text-center">

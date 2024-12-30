@@ -18,10 +18,10 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
   {% for task in tasks %}
   <!-- Card -->
+  <a href="{% url 'task_detail' task.id %}">
   <div
     class="shadow-lg rounded-2xl p-8 w-full {% if task.important %}bg-red-500 text-white{% else %}bg-white{% endif %} mb-4"
   >
-    <a href="{% url 'task_detail' task.id %}">
       <h2
         class="text-2xl font-semibold mb-4 text-center {% if task.important %}text-white {% else %}text-gray-800{% endif %}"
       >
@@ -39,8 +39,8 @@
       >
         {{ task.datecompleted|date:"M j, Y:i" }}
       </p>
-    </a>
-  </div>
+    </div>
+  </a>
   {% endfor %}
 </div>
 

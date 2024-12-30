@@ -136,13 +136,27 @@
 </div>
 
 <script>
-  // Alternar visibilidad del menú tipo card
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuToggle = document.getElementById("menu-toggle");
-    const menuCard = document.getElementById("menu-card");
-
-    menuToggle.addEventListener("click", () => {
-      menuCard.classList.toggle("hidden");
+    // Alternar visibilidad del menú tipo card
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.getElementById("menu-toggle");
+      const menuCard = document.getElementById("menu-card");
+  
+      // Mostrar u ocultar el menú al hacer clic en el botón
+      menuToggle.addEventListener("click", (event) => {
+        event.stopPropagation(); // Evita que el evento se propague al documento
+        menuCard.classList.toggle("hidden");
+      });
+  
+      // Cerrar el menú al hacer clic en cualquier parte fuera del menú
+      document.addEventListener("click", (event) => {
+        if (!menuCard.classList.contains("hidden")) {
+          const isClickInsideMenu = menuCard.contains(event.target);
+          const isClickInsideToggle = menuToggle.contains(event.target);
+  
+          if (!isClickInsideMenu && !isClickInsideToggle) {
+            menuCard.classList.add("hidden");
+          }
+        }
+      });
     });
-  });
-</script>
+  </script>

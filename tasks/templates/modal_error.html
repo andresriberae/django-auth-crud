@@ -1,0 +1,30 @@
+ <!-- Modal de Error -->
+ <div
+   id="error-modal"
+   class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+ >
+   <div class="bg-red-500 text-white shadow-lg rounded-lg p-6 w-full max-w-sm relative animate__animated animate__bounceIn">
+     <!-- Botón de cerrar -->
+     <button
+       id="close-modal"
+       class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl focus:outline-none"
+       aria-label="Close"
+     >
+       &times;
+     </button>
+     <!-- Contenido del error -->
+     <p class="text-center">{{ error }}</p>
+   </div>
+ </div>
+ <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const closeModal = document.getElementById("close-modal");
+      const errorModal = document.getElementById("error-modal");
+  
+      if (closeModal && errorModal) {
+        closeModal.addEventListener("click", () => {
+          errorModal.style.display = "none";
+        });
+      }
+    });
+  </script>
