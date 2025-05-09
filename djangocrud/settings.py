@@ -51,6 +51,8 @@ INSTALLED_APPS = [
 
 TAILWIND_APP_NAME = 'theme'
 
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
@@ -97,11 +99,14 @@ DATABASES = {
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
 
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.        
-        default='postgresql://postgres:postgres@localhost:5432/djangocrud',        
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST':'localhost',
+        'PORT':'5432'
+    }   
 }
 
 
